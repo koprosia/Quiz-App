@@ -22,13 +22,15 @@ class QuizInterface:
 
 
     def get_next_question(self):
+        self.canvas.config(bg='white')
         if self.quiz.still_has_questions():
-            self.canvas.config(bg='white')
             self.score_label.config(text=f"Score:{self.quiz.score}")
             q_text = self.quiz.next_question()
             self.canvas.itemconfig(self.question_text, text = q_text)
         else:
             self.canvas.itemconfig(self.question_text, text = "You've reached the end of the quiz!")
+            self.true_button.config(state="disabled")
+            self.false_button.config(state="disabled")
 
     def __init__(self, quiz_brain: QuizBrain):
         self.quiz = quiz_brain
